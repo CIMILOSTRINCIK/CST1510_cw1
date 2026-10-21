@@ -7,9 +7,6 @@ Lane  :  Cyber
 Date  :  08.10.2026
 
 Run it:   python template.py
-
-Work through the numbered sections in order. Each one tells you what it must do.
-Delete these instructions as you replace them with your code.
 """
 
 def status_of(percent):
@@ -21,20 +18,20 @@ def status_of(percent):
     else:
         return "OK"
     
-def check(value, limit):
+def check(failed_logins, total_attempts):
     """Returns the difference and percentage."""
-    difference = value - limit
-    percent = value / limit * 100
+    difference = failed_logins - total_attempts
+    percent = failed_logins / total_attempts * 100
     return difference, percent
 
-def print_report(label, value, limit, difference, percent, status):
+def print_report(source_ip, failed_logins, total_attempts, difference, percent, status):
     """Prints the report."""
     print()
     print("=" * 34)
-    print(f"  RECORD CHECK  -  {label}")
+    print(f"  Source IP  -  {source_ip}")
     print("=" * 34)
-    print(f"Value: {value:>27.2f}")
-    print(f"Limit: {limit:>27.2f}")
+    print(f"Failed logins: {failed_logins:19.2f}")
+    print(f"Total Attempts: {total_attempts:18.2f}")
     print(f"Difference: {difference:>22.2f}")
     print(f"Percentage: {percent:>21.2f}%")
     print(f"Status: {status}")
@@ -42,18 +39,18 @@ def print_report(label, value, limit, difference, percent, status):
 
 count_ol = 0
 while True:
-    label = input("Enter label ('quit' to stop): ")
-    if label == "quit":
+    source_ip = input("Source IP ('quit' to stop): ")
+    if source_ip == "quit":
         break
-    value = float(input("Enter value: "))
-    limit = float(input("Enter limit: "))
+    failed_logins = float(input("Failed logins: "))
+    total_attempts = float(input("Total attemtps: "))
 
-    difference, percent = check(value, limit)
+    difference, percent = check(failed_logins, total_attempts)
     status = status_of(percent)
 
     if status == "OVER LIMIT":
         count_ol += 1
 
-    print_report(label, value, limit, difference, percent, status)
+    print_report(source_ip, failed_logins, total_attempts, difference, percent, status)
 
 print("OVER LIMIT amount:", count_ol)
