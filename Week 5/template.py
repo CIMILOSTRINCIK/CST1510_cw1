@@ -45,6 +45,8 @@ def load_records(path):
 records = load_records("lab5_records.txt")
 
 for record in records:
+    status = record.status()
+
     print()
     print("=" * 34)
     print(f"  RECORD CHECK  -  {record.label}")
@@ -52,7 +54,7 @@ for record in records:
     print(f"Source IP:       {record.label}")
     print(f"Failed logins:   {record.value}")
     print(f"Total attempts:  {record.limit}")
-    print(f"Status:          {record.status()}")
+    print(f"Status:          {status}")
 
     if record.status() == "OVER LIMIT":
         Record.over_limit_count += 1

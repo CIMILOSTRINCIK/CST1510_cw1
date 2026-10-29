@@ -43,7 +43,7 @@ while True:
     if source_ip == "quit":
         break
     failed_logins = float(input("Failed logins: "))
-    total_attempts = float(input("Total attemtps: "))
+    total_attempts = float(input("Total attempts: "))
 
     difference, percent = check(failed_logins, total_attempts)
     status = status_of(percent)
